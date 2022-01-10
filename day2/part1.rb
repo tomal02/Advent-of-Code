@@ -2,7 +2,7 @@ require 'csv'
 
 input = CSV.read('input.csv').flatten
 
-horizontalPos, verticalPos = 0, 0
+horizontalPos, verticalPos, aim, depth = 0, 0, 0, 0
 
 input.each do |line|
   direction = line.split(' ')[0]
@@ -10,12 +10,13 @@ input.each do |line|
 
   case direction
   when 'up'
-    verticalPos -= amount
+    aim -= amount
   when 'down'
-    verticalPos += amount
+    aim += amount
   when 'forward'
     horizontalPos += amount
+    depth += (aim * amount)
   end
 end
 
-puts verticalPos * horizontalPos
+puts depth * horizontalPos
